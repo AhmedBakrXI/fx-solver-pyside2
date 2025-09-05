@@ -64,16 +64,16 @@ class PlotterWidget(QWidget):
             self.ax.plot(xs, y1, label="$f_1(x)")
             self.ax.plot(xs, y2, label="$f_2(x)")
 
-        if annotate is not None:
-            xr, yr = annotate
-            if xr is not None and yr is not None and np.isfinite(xr) and np.isfinite(yr):
-                self.ax.scatter([xr], [yr], s=60, zorder=5)
-                self.ax.annotate(f"Solution\n(x={xr:.4g}, y={yr:.4g})",
-                                 xy=(xr, yr),
-                                 xytext=(10, 10),
-                                 textcoords="offset points",
-                                 bbox=dict(boxstyle="round,pad=0.3", fc="w", ec="0.5", alpha=0.9),
-                                 arrowprops=dict(arrowstyle="->", lw=1))
+        if annotate is not None and annotate[0] is not None:
+            for (xr, yr) in annotate:
+                if xr is not None and yr is not None and np.isfinite(xr) and np.isfinite(yr):
+                    self.ax.scatter([xr], [yr], s=60, zorder=5)
+                    self.ax.annotate(f"Solution\n(x={xr:.4g}, y={yr:.4g})",
+                                     xy=(xr, yr),
+                                     xytext=(10, 10),
+                                     textcoords="offset points",
+                                     bbox=dict(boxstyle="round,pad=0.3", fc="w", ec="0.5", alpha=0.9),
+                                     arrowprops=dict(arrowstyle="->", lw=1))
 
         self.ax.grid(True, alpha=0.3)
         self.ax.legend(loc="best")

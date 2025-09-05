@@ -1,21 +1,16 @@
 import numpy as np
 
 class FxSolver:
-    NEAR_ZERO = 1e-6
+    NEAR_ZERO = 1e-9
 
     @staticmethod
-    def find_root(f1, f2, x_min=-10, x_max=10, steps=5000, max_iters=5):
+    def find_roots(f1, f2, x_min=-10, x_max=10, steps=5000):
         def g(x):
             return f1(x) - f2(x)
 
-        left, right = x_min, x_max
-        for _ in range(max_iters):
-            x_vals, g_vals = FxSolver._sample_function(g, left, right, steps)
-            root = FxSolver._scan_for_root(x_vals, g_vals, f1, g)
-            if root is not None:
-                return root
-            left, right = FxSolver._expand_search_range(left, right)
-        return None, None
+        x_vals, g_vals = FxSolver._sample_function(g, x_min, x_max, steps)
+        roots = FxSolver._scan_for_roots(x_vals, g_vals, f1, g)
+        return roots  # list of (x, y) pairs
 
     @staticmethod
     def _sample_function(g, left, right, steps):
@@ -24,18 +19,20 @@ class FxSolver:
         return x_vals, g_vals
 
     @staticmethod
-    def _scan_for_root(x_vals, g_vals, f1, g):
+    def _scan_for_roots(x_vals, g_vals, f1, g):
+        roots = []
         for i in range(len(x_vals) - 1):
             g1, g2 = g_vals[i], g_vals[i + 1]
             if np.isnan(g1) or np.isnan(g2):
                 continue
-            if g1 == 0.0:
-                return x_vals[i], f1(x_vals[i])
-            if g2 == 0.0:
-                return x_vals[i + 1], f1(x_vals[i + 1])
-            if g1 * g2 < 0.0:
-                return FxSolver._bisection(x_vals[i], x_vals[i + 1], g1, f1, g)
-        return None
+            if g1 == 0.0:  # exact root
+                roots.append((x_vals[i], f1(x_vals[i])))
+            elif g2 == 0.0:  # exact root
+                roots.append((x_vals[i + 1], f1(x_vals[i + 1])))
+            elif g1 * g2 < 0.0:  # sign change → root in between
+                root = FxSolver._bisection(x_vals[i], x_vals[i + 1], g1, f1, g)
+                roots.append(root)
+        return roots
 
     @staticmethod
     def _bisection(l, r, g1, f1, g):
@@ -51,8 +48,3 @@ class FxSolver:
             else:
                 l = mid
         return (l + r) / 2, f1((l + r) / 2)
-
-    @staticmethod
-    def _expand_search_range(left, right):
-        width = left - right
-        return left - width, right + width

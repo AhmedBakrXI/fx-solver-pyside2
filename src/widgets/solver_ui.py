@@ -56,8 +56,8 @@ class SolverUI(QWidget):
 
             f1 = ExpressionParser.convert_expr_to_function(f1_str)
             f2 = ExpressionParser.convert_expr_to_function(f2_str)
-            xr, yr = FxSolver.find_root(f1, f2, x_min, x_max)
-            if not xr or not yr:
+            roots = FxSolver.find_roots(f1, f2, x_min, x_max)
+            if not roots or roots[0] is None:
                 QMessageBox.information(self, "No solution found", "No solution found")
                 self.plotter.clear()
                 self.plotter.plot_functions(f1, f2, f1_expr=f1_str, f2_expr=f2_str)
@@ -68,10 +68,9 @@ class SolverUI(QWidget):
                 f1, f2,
                 f1_expr=f1_str,
                 f2_expr=f2_str,
-                x_center=float(xr),
                 span=float(span),
                 default_range=(x_min, x_max),
-                annotate=(xr, yr)
+                annotate=roots
             )
 
         except Exception as e:
