@@ -28,11 +28,7 @@ class ExpressionParser:
         # Replace '^' with '**' for exponentiation
         expression = expression.strip().replace("^", "**")
         # Check for invalid characters in the expression
-        expr_test = expression.replace("x", "").replace("log10", "").replace("sqrt", "")
-        is_bad = re.search(ExpressionParser.regexNotAllowed, expr_test)
-        # If any invalid characters are found, raise an error
-        if is_bad:
-            raise ValueError(f"Expression contains invalid characters: {is_bad.group(0)}")
+        ExpressionParser.validate_expression(expression)
 
         # Define the function that evaluates the expression
         def f(x):
@@ -47,3 +43,11 @@ class ExpressionParser:
                 raise ValueError(f"Error evaluating expression: {e}")
 
         return f
+
+    @staticmethod
+    def validate_expression(expression: str):
+        expr_test = expression.replace("x", "").replace("log10", "").replace("sqrt", "")
+        is_bad = re.search(ExpressionParser.regexNotAllowed, expr_test)
+        # If any invalid characters are found, raise an error
+        if is_bad:
+            raise ValueError(f"Expression contains invalid characters: {is_bad.group(0)}")
