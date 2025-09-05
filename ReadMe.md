@@ -13,6 +13,7 @@ It also includes a feature to plot the two functions on a graph for visual compa
   - [Install Dependencies](#install-dependencies)
   - [Run the Application](#run-the-application)
 - [Snapshots](#snapshots)
+- [Demo Video](#demo-video)
 
 ## Features
 
@@ -58,45 +59,47 @@ python main.py
 
 ## Snapshots
 
-![Welcome Screen](images/snapshots/start.png)
+![Welcome Screen](assets/snapshots/start.png)
 <div style="text-align: center; font-style: italic">
     Welcome screen showing the main interface
 </div>
 <br>
 
-![Test 1 Valid](images/snapshots/test1_valid.png)
+![Test 1 Valid](assets/snapshots/test1_valid.png)
 <div style="text-align: center; font-style: italic">
     Valid input screen with two intersecting points
 </div>
 <br>
 
-![Test 2 Valid](images/snapshots/test2_valid.png)
+![Test 2 Valid](assets/snapshots/test2_valid.png)
 <div style="text-align: center; font-style: italic">
     Valid input screen with one intersecting point
 </div>
 <br>
 
-![Test 3 Valid](images/snapshots/test3_valid.png)
+![Test 3 Valid](assets/snapshots/test3_valid.png)
 <div style="text-align: center; font-style: italic">
     Valid input with undefined interval for solutions
 </div>
 <br>
 
-![No Solution](images/snapshots/no_solution.png)
+![No Solution](assets/snapshots/no_solution.png)
 <div style="text-align: center; font-style: italic">
     Welcome screen showing the main interface
 </div>
 <br>
 
-![Test 1 Invalid](images/snapshots/test1_invalid.png)
+![Test 1 Invalid](assets/snapshots/test1_invalid.png)
 <div style="text-align: center; font-style: italic">
     Test invalid characters in input
 </div>
 <br>
 
-![Test 2 Invalid](images/snapshots/test2_invalid.png)
+![Test 2 Invalid](assets/snapshots/test2_invalid.png)
 <div style="text-align: center; font-style: italic">
     Test empty input
 </div>
 
+## Demo Video
+[![Demo Video](assets/snapshots/start.png)](assets/videos/Demo.mp4)
 
