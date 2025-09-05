@@ -37,15 +37,21 @@ class ExpressionParser:
             try:
                 # Safely evaluate the expression using eval with restricted built-ins
                 return eval(expression, {"__builtins__": {}}, local_subs)
-            except (ZeroDivisionError, SyntaxError, ValueError):
+            except (ZeroDivisionError, ValueError):
                 return np.nan
             except Exception as e:
                 raise ValueError(f"Error evaluating expression: {e}")
 
+        try:
+            _ = f(0) # Test the function with a sample input to catch errors early
+        except Exception as e:
+            raise ValueError(f"Invalid expression: {e}")
         return f
 
     @staticmethod
     def validate_expression(expression: str):
+        if not expression or not isinstance(expression, str) or expression.strip() == "":
+            raise ValueError("Expression must be a non-empty string.")
         expr_test = expression.replace("x", "").replace("log10", "").replace("sqrt", "")
         is_bad = re.search(ExpressionParser.regexNotAllowed, expr_test)
         # If any invalid characters are found, raise an error
