@@ -8,7 +8,7 @@ It also includes a feature to plot the two functions on a graph for visual compa
 ## Table of Contents
 - [Features](#features)
 - [Requirements](#requirements)
-- [Installation and Usage](#installation-and-usage)
+- [How to Install and Use](#how-to-install-and-use)
   - [Download](#download)
   - [Install Dependencies](#install-dependencies)
   - [Run the Application](#run-the-application)
@@ -35,8 +35,37 @@ It also includes a feature to plot the two functions on a graph for visual compa
 <img src="https://img.shields.io/badge/NumPy-Array%20Computing-013243?style=for-the-badge&logo=numpy&logoColor=white" />
 ## Installation and Usage
 
+## How to Install and Use
+### Directory Structure
+```
+fx-solver-pyside2/
+│├── assets/
+│   ├── snapshots/
+│   └── videos/
+│├── src/
+│   ├── fxsolver/
+│   │ ├── parser.py
+│   │ └── solver.py
+│   │ 
+│   ├── widgets/
+│   │ ├── app.py
+│   │ ├── solver_ui.py
+│   │ ├── plotter_widget.py
+│   │ └── input_widget.py
+│   └── main.py
+│├── test/
+│   ├── fxsolver/
+│   │ ├── parser_tests.py
+│   │ └── solver_tests.py
+│   └── UI/
+│     └── app_test.py
+│├── requirements.txt
+│├── .gitignore
+│├── pytest.ini
+│└── ReadMe.md
+└── ReadMe.md
+```
 ### Download
-
 Clone the repository:
 
 ```sh
