@@ -1,0 +1,1 @@
+# FX Solver PySide2
