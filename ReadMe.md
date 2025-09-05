@@ -33,7 +33,7 @@ It also includes a feature to plot the two functions on a graph for visual compa
 <img src="https://img.shields.io/badge/Matplotlib-Visualization-11557c?style=for-the-badge&logo=plotly&logoColor=white" />
 <br>
 <img src="https://img.shields.io/badge/NumPy-Array%20Computing-013243?style=for-the-badge&logo=numpy&logoColor=white" />
-## Installation and Usage
+
 
 ## How to Install and Use
 ### Directory Structure
