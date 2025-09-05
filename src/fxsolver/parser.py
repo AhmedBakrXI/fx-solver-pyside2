@@ -48,6 +48,10 @@ class ExpressionParser:
             raise ValueError(f"Invalid expression: {e}")
         return f
 
+    """
+    This method checks the expression for any invalid characters or patterns.
+    It raises a ValueError if the expression is invalid.
+    """
     @staticmethod
     def validate_expression(expression: str):
         if not expression or not isinstance(expression, str) or expression.strip() == "":
