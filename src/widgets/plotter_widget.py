@@ -1,3 +1,4 @@
+from PySide2.QtGui import Qt
 from PySide2.QtWidgets import QWidget, QVBoxLayout
 
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
@@ -29,7 +30,14 @@ class PlotterWidget(QWidget):
         self.setLayout(layout)
 
     def apply_styles(self):
-        pass
+        self.setAttribute(Qt.WA_StyledBackground, True)
+        self.setStyleSheet(
+            """
+            PlotterWidget {
+                background-color: #ffffff;
+            }
+            """
+        )
 
     def connect_signals(self):
         pass

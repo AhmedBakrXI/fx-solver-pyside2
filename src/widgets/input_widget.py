@@ -1,3 +1,4 @@
+from PySide2.QtGui import Qt
 from PySide2.QtWidgets import (
     QWidget, QLineEdit, QVBoxLayout, QLabel, QGridLayout
 )
@@ -5,6 +6,10 @@ from PySide2.QtWidgets import (
 class InputPanelWidget(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
+        self.f2_input = None
+        self.f2_label = None
+        self.f1_input = None
+        self.f1_label = None
         self.init_components()
         self.init_layout()
         self.apply_styles()
@@ -29,7 +34,31 @@ class InputPanelWidget(QWidget):
         self.setLayout(grid)
 
     def apply_styles(self):
-        pass
+        self.setAttribute(Qt.WA_StyledBackground, True)
+        self.setStyleSheet(
+            """
+            InputPanelWidget {
+                background-color: #f0f0f0;
+                color: #ffffff;
+                max-height: 120px;
+                border-top: 1px solid #cccccc;
+                border-radius: 16px;
+            }
+            QLineEdit {
+                background-color: #ffffff;
+                border-radius: 8px;
+                border: 1px solid #cccccc;
+                height: 20px;
+                min-width: 100px;
+                padding: 4px;
+            }
+            QLabel {
+                font-weight: bold;
+                font-size: 14px;
+                color: #0000ff;
+            }
+            """
+        )
 
     def connect_signals(self):
         pass
