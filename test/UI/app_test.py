@@ -1,4 +1,4 @@
-from PySide2 import QtWidgets, QtCore
+from PySide2 import QtWidgets
 from PySide2.QtGui import Qt
 
 from src.widgets.solver_ui import SolverUI

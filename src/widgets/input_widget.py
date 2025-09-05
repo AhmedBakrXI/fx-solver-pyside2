@@ -57,6 +57,7 @@ class InputPanelWidget(QWidget):
 
     def init_layout(self):
         grid = QGridLayout()
+        grid.setSpacing(10)
         grid.addWidget(self.f1_label, 0, 0)
         grid.addWidget(self.f1_input, 0, 1)
         grid.addWidget(self.f2_label, 0, 2)
@@ -81,9 +82,9 @@ class InputPanelWidget(QWidget):
             InputPanelWidget {
                 background-color: #F3F3F3;
                 color: #ffffff;
-                max-height: 150px;
+                max-height: 180px;
                 border-top: 1px solid #cccccc;
-                border-radius: 16px;
+                border-radius: 15px;
             }
             QLineEdit {
                 background-color: #ffffff;
@@ -92,6 +93,7 @@ class InputPanelWidget(QWidget):
                 height: 20px;
                 min-width: 100px;
                 padding: 4px;
+                font-size: 15px;
             }
             QDoubleSpinBox {
                 background-color: #ffffff;
@@ -100,6 +102,7 @@ class InputPanelWidget(QWidget):
                 height: 20px;
                 min-width: 100px;
                 padding: 4px;
+                font-size: 15px;
             }
             QAbstractSpinBox::up-button {
                 width: 0px; height: 0px;
@@ -109,13 +112,13 @@ class InputPanelWidget(QWidget):
             }
             QLabel {
                 font-weight: bold;
-                font-size: 14px;
+                font-size: 15px;
                 color: #0451A5;
             }
             QPushButton {
                 border-radius: 8px;
                 font-weight: bold;
-                font-size: 14px;
+                font-size: 15px;
                 width: 100px;
                 color: #ffffff;
                 padding: 6px 12px;
@@ -128,6 +131,13 @@ class InputPanelWidget(QWidget):
         self.clear_btn.setStyleSheet("background-color: #F44747;")
         self.clear_btn.setCursor(Qt.PointingHandCursor)
         self.clear_btn.setFixedHeight(30)
+
+        self.f1_input.setFixedHeight(30)
+        self.f2_input.setFixedHeight(30)
+        self.x_min.setFixedHeight(30)
+        self.x_max.setFixedHeight(30)
+        self.span.setFixedHeight(30)
+
 
     def connect_signals(self):
         pass
