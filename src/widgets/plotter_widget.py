@@ -6,8 +6,12 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 
-
+"""
+The PlotterWidget class is a QWidget that integrates a Matplotlib figure and canvas for plotting functions.
+It includes a navigation toolbar for interactive features like zooming and panning.
+"""
 class PlotterWidget(QWidget):
+    # Initialize the PlotterWidget with optional parent
     def __init__(self, parent=None):
         super().__init__(parent)
         self.toolbar = None
@@ -19,18 +23,21 @@ class PlotterWidget(QWidget):
         self.apply_styles()
         self.connect_signals()
 
+    # Initializes the UI components of the PlotterWidget, including the Matplotlib figure, canvas, and toolbar.
     def init_components(self):
         self.figure = Figure(figsize=(5, 4), dpi=100, tight_layout=True)
         self.canvas = FigureCanvas(self.figure)
         self.ax = self.figure.add_subplot(111)
         self.toolbar = NavigationToolbar(self.canvas, self)
 
+    # Sets up the layout of the PlotterWidget, arranging the toolbar and canvas vertically.
     def init_layout(self):
         layout = QVBoxLayout()
         layout.addWidget(self.toolbar)
         layout.addWidget(self.canvas)
         self.setLayout(layout)
 
+    # Applies custom styles to the PlotterWidget for consistent appearance.
     def apply_styles(self):
         self.setAttribute(Qt.WA_StyledBackground, True)
         self.setStyleSheet(
@@ -41,22 +48,26 @@ class PlotterWidget(QWidget):
             """
         )
 
+    # Connects signals to slots for interactive functionality (currently a placeholder).
     def connect_signals(self):
         pass
 
+    # Plots two functions on the axes, with options for centering, span, and annotations.
     def plot_functions(self, f1, f2, f1_expr: str = None, f2_expr: str = None, x_center=None, span=5.0, default_range=(-10, 10), annotate=None):
         self.ax.clear()
-
+        # Determine x range based on center and span or default range
         if x_center is not None and np.isfinite(x_center):
             x_min = x_center - span
             x_max = x_center + span
         else:
             x_min, x_max = default_range
 
+        # Generate x values and compute corresponding y values for both functions.
         xs = np.linspace(x_min, x_max, 1000)
         y1 = np.array([f1(x) for x in xs], dtype=float)
         y2 = np.array([f2(x) for x in xs], dtype=float)
 
+        # Plot the functions with appropriate labels.
         if (f1_expr is not None) and (f2_expr is not None):
             self.ax.plot(xs, y1, label=f"$f_1(x) = {f1_expr.replace('*', '')}$")
             self.ax.plot(xs, y2, label=f"$f_2(x) = {f2_expr.replace('*', '')}$")
@@ -64,6 +75,7 @@ class PlotterWidget(QWidget):
             self.ax.plot(xs, y1, label="$f_1(x)")
             self.ax.plot(xs, y2, label="$f_2(x)")
 
+        # Annotate intersection points if provided.
         if annotate is not None and annotate[0] is not None:
             for (xr, yr) in annotate:
                 if xr is not None and yr is not None and np.isfinite(xr) and np.isfinite(yr):
@@ -82,6 +94,7 @@ class PlotterWidget(QWidget):
         self.ax.set_title("PySolver Function Plotter")
         self.canvas.draw_idle()
 
+    # Clears the current plot from the axes and refreshes the canvas.
     def clear(self):
         self.ax.clear()
         self.canvas.draw_idle()

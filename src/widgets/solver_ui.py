@@ -7,8 +7,12 @@ from src.fxsolver.solver import FxSolver
 from src.widgets.input_widget import InputPanelWidget
 from src.widgets.plotter_widget import PlotterWidget
 
-
+"""
+SolverUI is the main application window that integrates the PlotterWidget and InputPanelWidget.
+It handles user interactions, including solving functions and clearing inputs, and manages the layout and styling of the UI.
+"""
 class SolverUI(QWidget):
+    # Initialize the SolverUI with optional parent
     def __init__(self):
         super().__init__()
         self.plotter = None
@@ -17,6 +21,7 @@ class SolverUI(QWidget):
         self.init_ui()
         self.setup_connections()
 
+    # Initializes the UI components and layout of the SolverUI.
     def init_ui(self):
         self.setWindowTitle('Solver UI')
         self.setGeometry(100, 100, 800, 600)
@@ -39,10 +44,12 @@ class SolverUI(QWidget):
             """
         )
 
+    # Sets up the connections between UI components and their respective event handlers.
     def setup_connections(self):
         self.input_panel.solve_btn.clicked.connect(self.on_solve)
         self.input_panel.clear_btn.clicked.connect(self.on_clear)
 
+    # Event handler for the "Solve" button; processes input functions and plots results.
     def on_solve(self):
         try:
             f1_str = self.input_panel.f1_input.text()
@@ -54,9 +61,12 @@ class SolverUI(QWidget):
             if not f1_str or not f2_str:
                 raise ValueError("Both function inputs must be provided.")
 
+            # Convert input strings to callable functions
             f1 = ExpressionParser.convert_expr_to_function(f1_str)
             f2 = ExpressionParser.convert_expr_to_function(f2_str)
+            # Find roots of the equations
             roots = FxSolver.find_roots(f1, f2, x_min, x_max)
+            # Handle case where no roots are found
             if not roots or roots[0] is None:
                 QMessageBox.information(self, "No solution found", "No solution found")
                 self.plotter.clear()
@@ -76,6 +86,7 @@ class SolverUI(QWidget):
         except Exception as e:
             QMessageBox.critical(self, "Error", str(e))
 
+    # Event handler for the "Clear" button; resets input fields and clears the plot.
     def on_clear(self):
         self.input_panel.f1_input.clear()
         self.input_panel.f2_input.clear()

@@ -3,7 +3,13 @@ from PySide2.QtWidgets import (
     QWidget, QLineEdit, QLabel, QGridLayout, QDoubleSpinBox, QHBoxLayout, QPushButton
 )
 
+"""
+InputPanelWidget is a QWidget that provides input fields for two functions, range limits, and a span value.
+It includes "Solve" and "Clear" buttons to trigger actions.
+It uses a grid layout for organized placement of components and applies custom styles for child components.
+"""
 class InputPanelWidget(QWidget):
+    # Initialize the InputPanelWidget with optional parent
     def __init__(self, parent=None):
         super().__init__(parent)
         self.clear_btn = None
@@ -18,11 +24,15 @@ class InputPanelWidget(QWidget):
         self.f2_label = None
         self.f1_input = None
         self.f1_label = None
+        # Initialize components, layout, styles, and signals
         self.init_components()
         self.init_layout()
         self.apply_styles()
         self.connect_signals()
 
+    """
+    Initializes the UI components of the InputPanelWidget, including labels, input fields, and buttons.
+    """
     def init_components(self):
         self.f1_label = QLabel('f1(x):')
         self.f1_input = QLineEdit()
@@ -54,7 +64,9 @@ class InputPanelWidget(QWidget):
         self.clear_btn = QPushButton('Clear')
 
 
-
+    """
+    Organizes the UI components into a grid layout for the InputPanelWidget.
+    """
     def init_layout(self):
         grid = QGridLayout()
         grid.setSpacing(10)
@@ -75,6 +87,9 @@ class InputPanelWidget(QWidget):
         grid.addLayout(btn_layout, 3, 0, 1, 4)
         self.setLayout(grid)
 
+    """
+    Applies custom styles to the InputPanelWidget and its child components.
+    """
     def apply_styles(self):
         self.setAttribute(Qt.WA_StyledBackground, True)
         self.setStyleSheet(
@@ -139,6 +154,10 @@ class InputPanelWidget(QWidget):
         self.span.setFixedHeight(30)
 
 
+    """
+    Connects signals to slots for the InputPanelWidget. Currently, no signals are connected.
+    This method can be expanded in the future to handle button clicks or input changes.
+    """
     def connect_signals(self):
         pass
 
